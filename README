@@ -1,0 +1,17 @@
+const TelegramBot = require('node-telegram-bot-api');
+
+// Замените 'YOUR_BOT_TOKEN' на токен вашего бота
+const token = '6447749038:AAHOytS7uNKJZAjMsJRZW7KT-ev47dh50u4';
+const bot = new TelegramBot(token, { polling: true });
+
+const channelUsername = '-1002137528444'; // Замените на юзернейм вашего канала
+
+bot.onText(/\/generateLink/, (msg) => {
+    const chatId = msg.chat.id;
+
+    bot.createChatInviteLink(channelUsername).then((inviteLink) => {
+        bot.sendMessage(chatId, `Новая пригласительная ссылка для канала: ${inviteLink.invite_link}`);
+    }).catch((error) => {
+        bot.sendMessage(chatId, `Произошла ошибка при создании пригласительной ссылки: ${error}`);
+    });
+});
