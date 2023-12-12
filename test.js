@@ -10,6 +10,7 @@ const bot = new TelegramBot(token, { polling: true });
 const channelUsername = '-1002137528444'; // Замените на юзернейм вашего канала
 
 bot.onText(/\/start/, (msg) => {
+  
     const chatId = msg.chat.id;
     const userName = msg.from.username;
     bot.sendMessage(chatId, 'Вас вітає AcornTrafficBot! Оберіть один з варінтів:', {
@@ -37,6 +38,47 @@ bot.onText(/\/start/, (msg) => {
         const chatId = query.message.chat.id;
         const messageId = query.message.message_id; // Отримання ID повідомлення
         const data = query.data;
+
+
+        // ІНФОРМАЦІЯ
+
+
+        switch (data) {
+          // ... (інші варіанти обробки)
+          case 'info':
+            bot.editMessageText('Знайдіть потрібну інформацію тут:', {
+              chat_id: chatId,
+              message_id: messageId,
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    { text: 'Наш канал', callback_data: 'channel', url: 'https://t.me/+JP0QYpl8ZV5lNjFi'}
+                  ],
+                  [
+                    { text: 'Аккаунти', callback_data: 'account_info', url: 'https://telegra.ph/POKROKOVA-%D0%86NSTRUKC%D0%86YA-PO-ARB%D0%86TRAZHU-12-02' },
+                    { text: 'Креативи', callback_data: 'art_info', url: 'https://telegra.ph/POKROKOVA-%D0%86NSTRUKC%D0%86YA-PO-ARB%D0%86TRAZHU-12-02-2' },
+                    { text: 'Оплата', callback_data: 'payment_info', url: 'https://telegra.ph/POKROKOVA-%D0%86NSTRUKC%D0%86YA-PO-ARB%D0%86TRAZHU-12-02-3'},
+                  ],
+                  // [
+                  //   { text: 'Звуки', callback_data: 'video_sound', url: 'https://t.me/+pHRrstGRXj5mMTUy'},
+                  //   { text: 'Фото', callback_data: 'video_photo', url: 'https://t.me/+ByIu3MW9ZQ82NDFi'}
+                  // ],
+                  [
+                    
+                    { text: 'Наш чат', callback_data: 'chat', url: 'https://t.me/+-dElghLWneM0YWJi'}
+                  ],
+                  [
+                    { text: 'Назад', callback_data: 'back1' }
+                  ]
+                ]
+              }
+            });
+              break;
+          // ... (інші варіанти обробки)
+          default:
+              // решта вашого коду для обробки інших випадків
+              break;
+      }
 
 
       // ОПЛАТА
@@ -552,5 +594,10 @@ function updatePaymentInfo(userName, newCardNumber, chatId, bot) {
                     bot.sendMessage(chatId, `Помилка при створенні посилання: ${error}`);
                 });
             }
-
+            
           })
+
+
+
+
+          
